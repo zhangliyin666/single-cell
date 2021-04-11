@@ -363,3 +363,12 @@ wrap_plots(plots = plots, ncol = 1)
 
 prop.table(table(Idents(Proliferating), Proliferating$stim))
 table(subset(Proliferating,subset=celltype== 'IA')$stim)/sum(table(Proliferating$stim))
+
+cell.prop<-as.data.frame(prop.table(table(Idents(immune.combined), immune.combined$stim)))
+colnames(cell.prop)<-c("cluster","group","proportion")
+ggplot(cell.prop,aes(group,proportion,fill=cluster))+
+  geom_bar(stat="identity",position="fill")+
+  ggtitle("")+
+  theme_bw()+
+  theme(axis.ticks.length=unit(0.5,'cm'))+
+  guides(fill=guide_legend(title=NULL))
